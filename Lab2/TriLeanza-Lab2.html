@@ -8,21 +8,21 @@
        if (numFib < 3) {
           alert("The sequence must have 3 or more numbers.");
        } else {
-	      const myFib = []; // declare the array
+	      var myFib = []; // declare the array (used const instead of var which made it a block scope)
 		  myFib[0] = 0;
 		  myFib[1] = 1;
           
 		  // fill the array
-		  for ( i = numFib; i < 5; i++) {
+		  for ( var i = 0; i < numFib; i++) { //set i = numFib and i < 5
 		     myFib[i] = myFib[i - 2] + myFib[i - 1];
 		  }
 		  // write out the results
-           let ratio = "";
-		  for ( let i = 1; i < myFib.length; i++) {
-              ratio += myFib[i] + " ";
+           //set an open string to ratio should have been left blank because this is the sequence not the ratio
+		   		  for (i = 0; i<numFib; i++) { //set i = 1 and i <numFib.length let also declares locally
+              document.write(myFib[i] + " ") //tried setting the open, ratio, string to myFib[i] which I thought would be able to be read out
 		  }
 	   }
-       
+       var ratio = myFib[numFib-1] / myFib[numFib-2] //forgot to set this ratio
 	   document.write("Ratio: " + ratio );
 	</script>
 </head> 
