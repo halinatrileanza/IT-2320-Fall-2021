@@ -1,0 +1,77 @@
+<html>
+  <head> </head>
+  <body>
+    <!-- I reordered the script because the file reads from top to bottom and cannot fetch something that does not exist yet -->
+    <h2>Halina Tri-Leanza - IT 2320 - Lab5 - Stopwatch</h2>
+    <div id="stopwatch">00:00:00</div>
+    <!-- uses a div so the time can be displayed -->
+
+    <button onclick="startTimer()">Start</button>
+    <!-- when button is clicked the declared function runs in js-->
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+
+    <script>
+      const timer = document.getElementById("stopwatch"); // imports the stopwatch using the div
+      var hour = 0;
+      var min = 0; // declaring variables
+      var sec = 0;
+      var time = false; //use to run stopwatch
+
+      function startTimer() {
+        // if stopwatch is not running
+        if (time == false) {
+          time = true; // then start the stopwatch
+          stopwatchMath(); // once started run the function
+        }
+      }
+      function stopTimer() {
+        if (time == true) {
+          // if stopwatch is running
+          time = false; // stop the watch
+        }
+      }
+      function resetTimer() {
+        //resets the values to 0 and shows on the html
+        timer.innerHTML = "00:00:00";
+        time = false;
+        hour = 0;
+        sec = 0;
+        min = 0;
+      }
+      function stopwatchMath() {
+        // runs when starttimer logic calls it
+        if (time == true) {
+          // if the stopwatch is running do the following
+          sec = parseInt(sec); //change string to int
+          min = parseInt(min);
+          hour = parseInt(hour);
+          sec = sec + 1; // add 1 second
+          if (sec == 60) {
+            //until seconds hit 60 then
+            min = min + 1; //add one min and reset sec
+            sec = 0;
+          }
+          if (min == 60) {
+            //when 1 min is achieved
+            hour = hour + 1; //it adds an hour and resets min and sec
+            min = 0;
+            sec = 0;
+          }
+          if (sec < 10 || sec == 0) {
+            // if a number is less than 10 it needs a 0 infront
+            sec = "0" + sec; // ex. 7 seconds would display as 00:00:07
+          }
+          if (min < 10 || min == 0) {
+            min = "0" + min;
+          }
+          if (hour < 10 || hour == 0) {
+            hour = "0" + hour;
+          }
+          timer.innerHTML = hour + ":" + min + ":" + sec; // shows the stopwatch time in the div above
+          setTimeout("stopwatchMath()", 1000); // ensures that stopwatch runs once a second so the count is right
+        }
+      }
+    </script>
+  </body>
+</html>
