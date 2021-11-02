@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#image").hide(); // hides the gif
+        $("button").click(function () {
+          var w = $(window).width() - 400; //ensures that the gif stays on the page no matter the size
+          var ws = w + "px";
+          $("#image").fadeIn(1000); // gif fades in
+          $("#image").animate({ left: ws }, 3000, function () { // gif walks across the screen
+            $("#image").attr("class", "back"); // sets class to back
+          });
+          $("#image").animate({ left: 0 }, 3000, function () { // flips and walks the other way
+            $("#image").attr("class", "flipped");
+          });
+
+          $("#image").fadeOut(1000); // gif fades away
+        });
+      });
+    </script>
+    
+    <style>
+    {% comment %} css to flip image {% endcomment %}
+      .back {
+        transform: scaleX(-1); 
+      }
+      .flipped {
+        transform: rotateY(180deg);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Halina Tri-Leanza - IT 2320 - Lab 7</h2>
+    <button>Start</button>
+    <img
+      src="https://learn-us-east-1-prod-fleet02-xythos.content.blackboardcdn.com/5d2dddd0100bb/6509771?X-Blackboard-Expiration=1635822000000&X-Blackboard-Signature=m10jWWTuxEbfl5ZKKCpVeQ8ant%2B3eRKSXGUMc33Gkl0%3D&X-Blackboard-Client-Id=100617&response-cache-control=private%2C%20max-age%3D21600&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27guy-walking.gif&response-content-type=image%2Fgif&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20211101T210000Z&X-Amz-SignedHeaders=host&X-Amz-Expires=21600&X-Amz-Credential=AKIAZH6WM4PL5SJBSTP6%2F20211101%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=bcdb08c5b40aec198b286b4d8e88a9d8ff9daf14d33fd8e579fd8679200fab80"
+      style="position: absolute"
+      id="image"
+    />
+  </body>
+</html>
