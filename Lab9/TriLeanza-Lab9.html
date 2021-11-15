@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <title>Halina Tri-Leanza - IT 2330 - Lab9</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      function getWeather() {
+        var zipCode = $("#zipCode").val();
+        var url =
+          "http://api.openweathermap.org/data/2.5/weather?zip=" +
+          zipCode +
+          ",us&appid=541b86c44af10adbd876083da11d8dc6&units=imperial";
+        $.ajax({
+          method: "GET",
+          url: url,
+          dataType: "json",
+        }).done(function (weatherResponse) {
+          temp = Math.round(weatherResponse.main.temp) + " *F";
+          min = Math.round(weatherResponse.main.temp_min) + " *F";
+          max = Math.round(weatherResponse.main.temp_max) + " *F";
+          speed = Math.round(weatherResponse.wind.speed);
+          $("#city").html(weatherResponse.name);
+          $("#condition").html(weatherResponse.weather[0].description);
+          $("#temp").html(temp);
+          $("#wind").html(
+            speed + " ---- " + weatherResponse.wind.deg + " degrees/direction "
+          );
+          $("#humid").html(weatherResponse.main.humidity + " %");
+          $("#min").html(min);
+          $("#max").html(max);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Halina Tri-Leanza - IT 2320 - Lab 9</h2>
+    ZIP Code: <input type="text" id="zipCode" />
+    <button id="go" onclick="getWeather()">Go</button><br /><br />
+    City Name: <span id="city"></span><br />
+    Current Condition: <span id="condition"></span><br />
+    Temperature: <span id="temp"></span><br />
+    Wind Speed and Direction: <span id="wind"></span><br />
+    Humidity: <span id="humid"></span> <br />
+    Temp Min: <span id="min"></span><br />
+    Temp Max: <span id="max"></span><br />
+  </body>
+</html>
