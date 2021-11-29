@@ -1,0 +1,55 @@
+<html>
+  <head></head>
+  <body>
+    <h2>Halina Tri-Leanza - IT 2320 - Lab 11</h2>
+    Enter a string: <input type="text" id="dataEntered" />
+    <button type="button" id="submit">Submit</button>
+    <br><br>
+    Search for this: <input type="text" id="search" />
+    <button type="button&quot;" id="searchbutton">Search</button>
+    <br><br>
+    <button type="button" id="sort">Sort the Array</button>
+    <button type="button" id="reverse">Reverse the Array</button>
+    <br><br>
+    <strong>My Array Output</strong><br />
+    <span id="results"> *Enter values to form array* </span>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+      var array = [];
+      $(document).ready(function () {
+        $("#submit").on("click", function () {
+          if ($("#dataEntered").val().length > 0) {
+            addDataEntered($("#dataEntered").val()); //saves entered strings to dataentered
+          }
+        });
+        function addDataEntered(newData) { //adds the new data into array
+          array.push(newData);
+          printArray(array);
+          $("#dataEntered").val("");
+        }
+        $("#searchbutton").on("click", function () { //searchs the array
+          if ($("#search").val().length > 0) {
+            searchArray($("#search").val());
+          }
+        });
+        $("#sort").on("click", function () {
+          printArray(array.sort()); // sorts the array in alpabetical order
+        });
+        $("#reverse").on("click", function () { // reverses the array
+          printArray(array.reverse());
+        });
+        function searchArray(newSearch) { // searchs for a string in the array
+          var foundSearch = array.findIndex((element) => element.indexOf(newSearch) >= 0);
+          if (foundSearch != -1) {
+            $("#results").text(foundSearch + ": " + array[foundSearch]);}
+            else { alert("Search string " + newSearch + " not found.");}
+        }
+        function printArray(display) {  //displays the full array 
+          var resultsHTML = "";
+            for (i = 0; i < display.length; i++) {
+              resultsHTML = resultsHTML + display[i] + ",  " ;}
+            $("#results").html(resultsHTML);}});
+    </script>
+  </body>
+</html>
