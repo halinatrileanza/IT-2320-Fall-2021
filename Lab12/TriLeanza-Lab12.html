@@ -1,0 +1,52 @@
+<html>
+  <body>
+    <h2>Halina Tri-Leanza - IT 2320 - Lab 12</h2>
+    <label>First number:</label> <input type="text" id="num" />
+    <label>Second number:</label> <input type="text" id="num2" />
+    <br />
+    <button type="button" id="gcd">GCD</button>
+    <button type="button" id="prime">Prime Numbers</button>
+    <br />
+    <span id="results">  </span>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+      $("#gcd").on("click", function () {
+        if ($("#num").val().length > 0 && $("#num2").val().length > 0) {
+          getGCD($("#num").val(), $("#num2").val());
+        }
+      });
+      function getGCD(num1, num2) {
+        var remain;
+        while (num1 % num2 > 0) {
+          remain = num1 % num2;
+          num1 = num2;
+          num2 = remain;
+        }
+        $("#results").text("gcd: " + num2);
+      }
+      $(document).ready(function () {
+        $("#prime").on("click", function () {
+          if ($("#num").val().length > 0) {
+            getPrime($("#num").val());
+          }
+        });
+        function getPrime(num1) {
+          if (num1 <= 1) return 0;
+          var numCount = 2;
+          var pres = "1. 1<br \>2. 2<br \>";
+          for (var i = 3; i <= num1; i = i + 2) {
+            var isPrime = true;
+            for (var j = 3; j <= Math.sqrt(i); j++) {
+              if (i % j === 0) {
+                isPrime = false;
+                break; }}
+            if (isPrime == true) {
+              numCount++;
+              pres = pres + numCount + ". " + i + "<br \>"; }
+          }
+          $("#results").html(pres);
+        }
+      });
+    </script>
+  </body>
+</html>
